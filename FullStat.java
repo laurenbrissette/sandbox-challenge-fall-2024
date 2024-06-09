@@ -1,12 +1,10 @@
-
-
 import java.util.ArrayList;
 
-// represents a set of Stats for a Participant
+// represents a set statistics, a Stat for a Participant with Session data
 public class FullStat extends Stat{
-  private ArrayList<Language> languages;
-  private double averageRoundScore;
-  private double averageSessionDuration;
+  private final ArrayList<Language> languages;
+  private final double averageRoundScore;
+  private final double averageSessionDuration;
 
   FullStat(int id, String name, ArrayList<Language> languages, double averageRoundScore, double averageSessionDuration) {
     super(id, name);

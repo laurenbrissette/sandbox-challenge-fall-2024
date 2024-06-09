@@ -1,31 +1,11 @@
-
-
-import java.util.ArrayList;
 import java.util.Comparator;
-
-import com.google.gson.Gson;
-
+import java.util.HashMap;
+import java.util.ArrayList;
+// function class
 public class Utils {
-  
-  // converts an array of json objects in string format to a 
-  // java ArrayList of json format String 
-  public ArrayList<String> toList(String str) {
-    String acc = "";
-    ArrayList<String> result = new ArrayList<String>();
-    for(int x = 0; x < str.length(); x += 1) {
-      String character = str.substring(x, x + 1);
-      if(character.equals("}")) { // end of an object 
-        // convert everything in that object to a session and add to list
-        result.add(acc);
-        // erase acc to reset
-        acc = "";
-      }
-      else if(!(character.equals("{"))) { // not the start of an object or the end
-        // must be inner info, so add to end
-        acc = acc + character;
-      }
-    }
-    return result;
+  // rounds the given double two places
+  public double round(double value) {
+    return Math.round(value * 100.0) / 100.0;
   }
 
   // sorts a list <T> using a Comparator
@@ -50,18 +30,28 @@ public class Utils {
   }
 }
 
+// compares two Stat objects 
 class StatComparator implements Comparator<Stat> {
+  // compares o1 and o2
   public int compare(Stat o1, Stat o2) {
-    return o1.name.compareTo(o2.name);
+    return (-1) * o1.name.compareTo(o2.name);
   }
 }
 
+// compares two Language objects 
+// constructed with HashMap containing all scores because the 
+// Language are compared based on their associated total score 
 class LanguageComparator implements Comparator<Language> {
+  HashMap<String, Integer> scores;
+  LanguageComparator(HashMap<String, Integer> scores) {
+    this.scores = scores;
+  }
+  // compares o1 and o2
   public int compare(Language o1, Language o2) {
-    if(o1.averageScore > o2.averageScore) {
+    if(scores.get(o1.language) > scores.get(o2.language)) {
       return 1;
     }
-    else if(o1.averageScore == o2.averageScore) {
+    else if(scores.get(o1.language) == scores.get(o2.language)) {
       return 0;
     }
     else {

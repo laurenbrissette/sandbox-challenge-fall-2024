@@ -1,6 +1,7 @@
 
+// represents a Round of a Session, essentially a subsection of the Session duration
 public class Round {
-  final int roundId;
+  private final int roundId;
   private final int sessionId;
   private final int score;
   private final int startTime;
