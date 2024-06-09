@@ -23,7 +23,7 @@ public class Participant {
 
   // determines the required stats of this Participant in form Stat 
   public Stat stats(HashMap<Integer, Session> allSessions, HashMap<Integer, Round> allRounds) {
-    if(this.sessions.isEmpty()) {
+    if(this.sessions.isEmpty()) { // initial check before continuing with FullStat
       return new EmptyStat(this.participantId, this.name);
     }
     // final variable values needed 
@@ -45,7 +45,7 @@ public class Participant {
       }
     }
     // for each language, create a Langauge w/ needed info and add to langStat list
-    // and accumulate round totals
+    // and accumulate totals
     double scoreTotal = 0;
     double durationTotal = 0;
     double numRoundsTotal = 0;
@@ -56,6 +56,7 @@ public class Participant {
       double avgDur = new Utils().round((double)durations.get(s) / (double)numRounds.get(s));
       // add to final array 
       langStat.add(new Language(s, avgScore, avgDur));
+      // accumulate totals
       scoreTotal = scoreTotal + scores.get(s);
       durationTotal = durationTotal + durations.get(s);
       numRoundsTotal = numRoundsTotal + numRounds.get(s);
