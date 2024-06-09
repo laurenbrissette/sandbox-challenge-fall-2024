@@ -1,5 +1,4 @@
 # sandbox-challenge-fall-2024
-# lauren brissette 
 
 # To run the program: 
 For my unique url, you can simply run the main method of the WriteToFile.java class, 
