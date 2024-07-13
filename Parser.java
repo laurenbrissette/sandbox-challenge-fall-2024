@@ -23,7 +23,7 @@ public class Parser {
   // considering the sorting requirements specified in the problem statement
   public ArrayList<Stat> getStats() {
     ArrayList<Stat> result = new ArrayList<Stat>();
-    for(Integer i : this.participants.keySet()) {
+    for(Integer i : this.participants.keySet()) { // add stat for this participant to result
       result.add(participants.get(i).stats(this.sessions, this.rounds));
     }
     return new Utils().sortBy(result, new StatComparator());

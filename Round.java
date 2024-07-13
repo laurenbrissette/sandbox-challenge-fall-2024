@@ -20,6 +20,11 @@ public class Round {
     return this.roundId;
   }
 
+  // returns the score of this Round
+  public int getScore() {
+    return this.score;
+  }
+
   // adds the score of this Round to given existing score and returns 
   public int addScore(int existing) {
     return existing + this.score;

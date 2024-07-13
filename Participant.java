@@ -34,6 +34,8 @@ public class Participant {
     HashMap<String, Integer> scores = new HashMap<String, Integer>(); // maps language -> total score
     HashMap<String, Integer> durations = new HashMap<String, Integer>(); // maps language -> total duration
     HashMap<String, Integer> numRounds = new HashMap<String, Integer>(); // maps language -> number of rounds
+    HashMap<String, Integer> maxScore = new HashMap<String, Integer>(); // maps language -> top round score
+
     // for every session id, accumulates necessary information on session based on above variables
     for(int i : this.sessions) { // for every one of our session ids 
       Session s = allSessions.get(i); // get the session
@@ -41,7 +43,7 @@ public class Participant {
         throw new IllegalArgumentException("s is null");
       }
       else { // update stats based on that session 
-        s.updateRoundStats(allRounds, scores, durations, numRounds);
+        s.updateRoundStats(allRounds, scores, durations, numRounds, maxScore);
       }
     }
     // for each language, create a Langauge w/ needed info and add to langStat list
@@ -55,7 +57,7 @@ public class Participant {
       // get average duration 
       double avgDur = new Utils().round((double)durations.get(s) / (double)numRounds.get(s));
       // add to final array 
-      langStat.add(new Language(s, avgScore, avgDur));
+      langStat.add(new Language(s, avgScore, avgDur, maxScore.get(s)));
       // accumulate totals
       scoreTotal = scoreTotal + scores.get(s);
       durationTotal = durationTotal + durations.get(s);
@@ -63,7 +65,7 @@ public class Participant {
     }
     // determine average session duration 
     avgSessionDuration = new Utils().round(durationTotal / this.sessions.size());
-    // determine average round duration 
+    // determine average round score 
     avgRoundScore = new Utils().round(scoreTotal / numRoundsTotal);
 
     return new FullStat(this.participantId, this.name, new Utils().sortBy(langStat, new LanguageComparator(scores)), avgRoundScore, avgSessionDuration);
