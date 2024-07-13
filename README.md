@@ -1,5 +1,4 @@
 # sandbox-challenge-fall-2024
-# lauren brissette 
 
 # To run the program: 
 For my unique url, you can simply run the main method of the WriteToFile.java class, 
@@ -13,6 +12,7 @@ String response = new Parser(r).getResponse();
 
 # Design process: 
 Initially I made the following observations: 
+
 (1) Session, Participant, and Round objects all have unique ids.  These ids lend themselves well to 
 HashMaps because I wouldn't have to worry about collisions, and because they would provide instant 
 lookup to almost all of the data in the initial GET request.
